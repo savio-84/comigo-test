@@ -7,7 +7,7 @@ export class CreateVehicle1713321940348 implements MigrationInterface {
             name: 'vehicles',
             columns: [
                 {name: 'id', type: 'integer', isPrimary: true, isGenerated: true, generationStrategy: 'increment'},
-                {name: 'clientId', type: 'integer'},
+                {name: 'client_id', type: 'integer'},
                 {name: 'model', type: 'varchar'},
                 {name: 'brand', type: 'varchar'},
                 {name: 'year', type: 'integer'},
@@ -15,7 +15,7 @@ export class CreateVehicle1713321940348 implements MigrationInterface {
             ],
             foreignKeys: [{
                 name: 'VehicleClient',
-                columnNames: ['clientId'],
+                columnNames: ['client_id'],
                 referencedTableName: 'clients',
                 referencedColumnNames: ['id'],
                 onUpdate: 'CASCADE',

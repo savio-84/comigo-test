@@ -4,15 +4,23 @@ import { CreateClient1713291888564 } from './migrations/1713291888564-CreateClie
 import { CreateVehicle1713321940348 } from './migrations/1713321940348-CreateVehicle';
 import { CreateTicket1713322368070 } from './migrations/1713322368070-CreateTicket';
 import { CreateTicketsVehicles1713328975556 } from './migrations/1713328975556-CreateTicketsVehicles';
+import { Seeds1713330147204 } from './migrations/1713330147204-seeds';
+
+import { Client } from '../../../modules/clients/entities/Client';
+import { Vehicle } from '../../../modules/vehicles/entities/Vehicle';
 
 const migrations: MixedList<string | Function> | undefined = [
   CreateClient1713291888564,
   CreateVehicle1713321940348,
   CreateTicket1713322368070,
-  CreateTicketsVehicles1713328975556
+  CreateTicketsVehicles1713328975556,
+  Seeds1713330147204
 ];
 
-const entities: MixedList<string | Function | EntitySchema<any>> | undefined = []
+const entities: MixedList<string | Function | EntitySchema<any>> | undefined = [
+  Client,
+  Vehicle
+]
 
 const options: DataSourceOptions = {
   type: 'postgres',

@@ -9,7 +9,7 @@ export class CreateClient1713291888564 implements MigrationInterface {
                 {name: 'id', type: 'int', isPrimary: true, isGenerated: true, generationStrategy: 'increment'},
                 {name: 'name', type: 'varchar'},
                 {name: 'cpf', type: 'varchar'},
-                {name: 'createdAt', type: 'timestamp with time zone', default: 'now()'},
+                {name: 'created_at', type: 'timestamp with time zone', default: 'now()'},
             ]
         }))
     }

@@ -12,8 +12,8 @@ export class CreateTicket1713322368070 implements MigrationInterface {
                 {name: 'description', type: 'varchar'},
                 {name: 'deadline', type: 'date'},
                 {name: 'status', type: 'varchar'},
-                {name: 'passiveContact', type: 'boolean'},
-                {name: 'contactType', type: 'varchar', isNullable: true},
+                {name: 'passive_contact', type: 'boolean'},
+                {name: 'contact_type', type: 'varchar', isNullable: true},
                 {name: 'intention', type: 'varchar'},
                 {name: 'created_at', type: 'timestamp with time zone', default: 'now()'},
             ]
