@@ -5,6 +5,7 @@ import { CreateVehicle1713321940348 } from './migrations/1713321940348-CreateVeh
 import { CreateTicket1713322368070 } from './migrations/1713322368070-CreateTicket';
 import { CreateTicketsVehicles1713328975556 } from './migrations/1713328975556-CreateTicketsVehicles';
 import { Seeds1713330147204 } from './migrations/1713330147204-seeds';
+import { Ticket } from '../../../modules/tickets/entities/Ticket';
 
 import { Client } from '../../../modules/clients/entities/Client';
 import { Vehicle } from '../../../modules/vehicles/entities/Vehicle';
@@ -19,7 +20,8 @@ const migrations: MixedList<string | Function> | undefined = [
 
 const entities: MixedList<string | Function | EntitySchema<any>> | undefined = [
   Client,
-  Vehicle
+  Vehicle,
+  Ticket
 ]
 
 const options: DataSourceOptions = {

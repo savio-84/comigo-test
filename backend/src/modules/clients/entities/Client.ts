@@ -1,4 +1,6 @@
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { Ticket } from '../../tickets/entities/Ticket';
+import { TicketVehicle } from '../../tickets/entities/TicketVehicle';
 
 @Entity('clients')
 export class Client {

@@ -58,7 +58,6 @@ export class Seeds1713330147204 implements MigrationInterface {
         await clientsRepository.remove({id: client1.id});
         await clientsRepository.remove({id: client2.id});
         await clientsRepository.remove({id: client3.id});
-        
     }
 
 }
