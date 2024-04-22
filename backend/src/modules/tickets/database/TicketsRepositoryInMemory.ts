@@ -1,22 +1,29 @@
 import { ICreateTicketDTO } from "../DTOs/ICreateTicketDTO";
 import { Ticket } from "../entities/Ticket";
-import { ITicketsRepository } from "./ITicketsRepository";
+import { IListResponse, ITicketsRepository } from "./ITicketsRepository";
 import { dateFnsDateProvider } from '../../../shared/container/index'
 import { IVehiclesRepository } from "../../vehicles/database/IVehiclesRepository";
 import { Vehicle } from "../../vehicles/entities/Vehicle";
+import { IClientsRepository } from "../../clients/database/IClientsRepository";
 
 export class TicketsRepositoryInMemory implements ITicketsRepository {
   repository: Ticket[] = [];
   idCounter: number = 0;
   constructor(
-    private vehiclesRepository: IVehiclesRepository
+    private vehiclesRepository: IVehiclesRepository,
+    private clientsRepository: IClientsRepository,
   ) {}
   
   async create(data: ICreateTicketDTO): Promise<Ticket> {
     const vehiclesList: Vehicle[] = [];
+    
     data.vehicles.forEach(async id => {
       const vehicle = await this.vehiclesRepository.get(id);
-      if (vehicle) vehiclesList.push(vehicle);
+      if (vehicle) {
+        const client = await this.clientsRepository.get(vehicle.clientId);
+        if (client) vehicle.client = client;
+        vehiclesList.push(vehicle);
+      }
     });
 
     const ticket = new Ticket();
@@ -36,8 +43,17 @@ export class TicketsRepositoryInMemory implements ITicketsRepository {
     return ticket;
   }
 
-  async list(): Promise<Ticket[]> {
-    return this.repository;
+  async list(page: number): Promise<IListResponse> {
+    const tickets = this.repository;
+    let numberOfPages = Math.ceil(this.repository.length / 3);
+    
+    const response: IListResponse = {
+      tickets,
+      numberOfPages,
+      page
+    }
+
+    return response;
   }
 
 }

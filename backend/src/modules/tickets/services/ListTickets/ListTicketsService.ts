@@ -1,4 +1,4 @@
-import { ITicketsRepository } from "../../database/ITicketsRepository";
+import { IListResponse, ITicketsRepository } from "../../database/ITicketsRepository";
 import { Ticket } from "../../entities/Ticket";
 
 export class ListTicketsService {
@@ -6,7 +6,7 @@ export class ListTicketsService {
     private ticketsRepository: ITicketsRepository,
   ) {}
 
-  public async execute(): Promise<Ticket[]> {
-    return this.ticketsRepository.list();
+  public async execute(page: number): Promise<IListResponse> {
+    return this.ticketsRepository.list(page);
   }
 }

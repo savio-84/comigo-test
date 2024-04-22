@@ -1,6 +1,5 @@
 import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
-import { Ticket } from '../../tickets/entities/Ticket';
-import { TicketVehicle } from '../../tickets/entities/TicketVehicle';
+import { Vehicle } from '../../vehicles/entities/Vehicle';
 
 @Entity('clients')
 export class Client {
@@ -12,6 +11,9 @@ export class Client {
 
   @Column({ type: 'varchar', length: 255, name: 'cpf' })
   public cpf: string;
+
+  @OneToMany(() => Vehicle, (vehicle) => vehicle.client)
+  public vehicles: Vehicle[];
 
   @CreateDateColumn({name: 'createdAt'})
   public createdAt: Date;

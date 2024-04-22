@@ -12,7 +12,13 @@ export interface ICreateTicket {
   deadline: Date;
 }
 
+export interface IListResponse {
+  tickets: Ticket[];
+  numberOfPages: number;
+  page: number;
+}
+
 export interface ITicketsRepository {
   create(data: ICreateTicket): Promise<Ticket>;
-  list(): Promise<Ticket[]>;
+  list(page: number): Promise<IListResponse>;
 }

@@ -23,7 +23,7 @@ describe('Create ticket service', () => {
   beforeEach(() => {
     clientsRepository = new ClientsRepositoryInMemory();
     vehiclesRepository = new VehiclesRepositoryInMemory();
-    ticketsRepository = new TicketsRepositoryInMemory(vehiclesRepository);
+    ticketsRepository = new TicketsRepositoryInMemory(vehiclesRepository, clientsRepository);
     
     createTicketService = new CreateTicketService(ticketsRepository, dateFnsDateProvider, vehiclesRepository);
     createClientService = new CreateClientService(clientsRepository);

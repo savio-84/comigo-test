@@ -25,7 +25,7 @@ describe('List tickets service', () => {
   beforeEach(() => {
     clientsRepository = new ClientsRepositoryInMemory();
     vehiclesRepository = new VehiclesRepositoryInMemory();
-    ticketsRepository = new TicketsRepositoryInMemory(vehiclesRepository);
+    ticketsRepository = new TicketsRepositoryInMemory(vehiclesRepository, clientsRepository);
     
     createTicketService = new CreateTicketService(ticketsRepository, dateFnsDateProvider, vehiclesRepository);
     createClientService = new CreateClientService(clientsRepository);
@@ -65,11 +65,17 @@ describe('List tickets service', () => {
       vehicles: [vehicle1.id, vehicle2.id],
     };
 
+    const page = 1;
+
     const ticket = await createTicketService.execute(data);
     const ticket2 = await createTicketService.execute(data2);
-    const tickets = await listTicketsService.execute();
+    const response = await listTicketsService.execute(page);
 
-    expect(tickets.length).toBe(2);
-    expect(tickets).toEqual([ticket, ticket2]);
+    expect(response.tickets.length).toBe(2);
+    expect(response.tickets).toEqual([ticket, ticket2]);
+    expect(response.tickets[0].vehicles.length).toBe(2);
+    expect(response.tickets[0].vehicles[0].clientId).toBe(client.id);
+    expect(response.tickets[0].vehicles[0].client.name).toBe(`Client 1`);
+    expect(response.numberOfPages).toBe(1);
   })
 })
